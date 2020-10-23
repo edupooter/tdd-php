@@ -39,5 +39,9 @@ class MaiorEMenorTest extends PHPUnit
         $maiorMenor->encontra($carrinho);
 
         $this->assertInstanceOf("CDC\Loja\Produto\Produto", $maiorMenor->getMenor());
+
+        $this->assertEquals("Geladeira", $maiorMenor->getMenor()->getNome());
+
+        $this->assertEquals("Geladeira", $maiorMenor->getMaior()->getNome());
     }
 }

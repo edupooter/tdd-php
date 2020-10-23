@@ -33,11 +33,13 @@ class MaiorEMenor
                 || $produto->getValor() < $this->menor->getValor()
             ) {
                 $this->menor = $produto;
-            } elseif (
+            }
+
+            if (
                 empty($this->maior)
                 || $produto->getValor() > $this->maior->getValor()
             ) {
-                $this->menor = $produto;
+                $this->maior = $produto;
             }
         }
     }
