@@ -1,2 +1,3 @@
-# tdd-php
-exemplos do livro: test-driven-development-teste-e-design-no-mundo-real-com-php
+# TDD - PHP
+Implementação dos exemplos do livro:
+* Test Driven Development - Teste e design no mundo real com PHP
