@@ -50,4 +50,18 @@ class ConversorDeNumeroRomanoTest extends PHPUnit
         $numero = $romano->converte("XXIV");
         $this->assertEquals(24, $numero);
     }
+
+    public function testeDeveEntenderOSimboloCC()
+    {
+        $romano = new ConversorDeNumeroRomano();
+        $numero = $romano->converte("CC");
+        $this->assertEquals(200, $numero);
+    }
+
+    public function testeDeveEntenderOSimboloMMMMMCMXLVI()
+    {
+        $romano = new ConversorDeNumeroRomano();
+        $numero = $romano->converte("MMMMMCMXLVI");
+        $this->assertEquals(5946, $numero);
+    }
 }
