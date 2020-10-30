@@ -4,12 +4,10 @@ namespace CDC\Loja\Produto;
 
 require "./vendor/autoload.php";
 
-use CDC\Loja\Carrinho\CarrinhoDeCompras;
 use CDC\Loja\Produto\Produto;
 use CDC\Loja\Produto\MaiorEMenor;
+use CDC\Loja\Carrinho\CarrinhoDeCompras;
 use PHPUnit\Framework\TestCase as PHPUnit;
-
-use function PHPUnit\Framework\assertEquals;
 
 class MaiorEMenorTest extends PHPUnit
 {
