@@ -2,6 +2,7 @@
 
 namespace CDC\Loja\Carrinho;
 
+use CDC\Loja\Produto\Produto;
 use PHPUnit\Framework\TestCase;
 
 class MaiorPrecoTest extends TestCase
@@ -29,6 +30,14 @@ class MaiorPrecoTest extends TestCase
      */
     public function testDeveRetornarValorItemCarrinhoTemUmElemento(): void
     {
-        # code...
+        $carrinho = new CarrinhoDeCompras();
+
+        $carrinho->adiciona(new Produto('Geladeira', 1201.45, 1));
+
+        $algoritmo = new MaiorPreco();
+
+        $valor = $algoritmo->encontra($carrinho);
+
+        $this->assertEquals(1201.45, $valor);
     }
 }

@@ -14,19 +14,35 @@ class CarrinhoDeCompras
         $this->produtos = new ArrayObject();
     }
 
-    public function adiciona(Produto $produto)
+    /**
+     * Inclui um Produto no Carrinho e retorna o Carrinho
+     *
+     * @param Produto $produto
+     * @return CarrinhoDeCompras
+     */
+    public function adiciona(Produto $produto): CarrinhoDeCompras
     {
         $this->produtos->append($produto);
 
         return $this;
     }
 
-    public function getProdutos()
+    /**
+     * Retorna a lista de Produtos no Carrinho
+     *
+     * @return ArrayObject
+     */
+    public function getProdutos(): ArrayObject
     {
         return $this->produtos;
     }
 
-    public function maiorValor()
+    /**
+     * Obtém o maior valor presente no Carrinho
+     *
+     * @return float
+     */
+    public function maiorValor(): float
     {
         if (count($this->getProdutos()) === 0) {
             return 0;
