@@ -17,29 +17,40 @@ class Produto
 
     /**
      * Get the value of nome
-     */ 
-    public function getNome()
+     *
+     * @return string
+     */
+    public function getNome(): string
     {
         return $this->nome;
     }
 
     /**
-     * Get the value of valor
-     */ 
-    public function getValor()
+     *  Get the value of valor
+     *
+     * @return float
+     */
+    public function getValor(): float
     {
         return $this->valorUnitario;
     }
 
     /**
      * Get the value of quantidade
-     */ 
-    public function getQuantidade()
+     *
+     * @return integer
+     */
+    public function getQuantidade(): int
     {
         return $this->quantidade;
     }
 
-    public function getValorTotal()
+    /**
+     * Retorna o valor total do produto
+     *
+     * @return float
+     */
+    public function getValorTotal(): float
     {
         return $this->valorUnitario * $this->quantidade;
     }
