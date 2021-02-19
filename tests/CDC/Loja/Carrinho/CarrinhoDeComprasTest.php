@@ -9,15 +9,27 @@ use PHPUnit\Framework\TestCase;
 class CarrinhoDeComprasTest extends TestCase
 {
     /**
+     * Carinho de Compras para ser testado
+     *
+     * @var CarrinhoDeCompras
+     */
+    private $carrinho;
+
+    protected function setUp(): void
+    {
+        $this->carrinho = new CarrinhoDeCompras();
+
+        parent::setUp();
+    }
+
+    /**
      * Verifica se o maior preço é zero quando o carrinho está vazio
      *
      * @return void
      */
     public function testDeveRetornarZeroSeCarrinhoVazio(): void
     {
-        $carrinho = new CarrinhoDeCompras();
-
-        $valor = $carrinho->maiorValor();
+        $valor = $this->carrinho->maiorValor();
 
         $this->assertEquals(0, $valor);
     }
@@ -29,11 +41,9 @@ class CarrinhoDeComprasTest extends TestCase
      */
     public function testDeveRetornarValorItemCarrinhoTemUmElemento(): void
     {
-        $carrinho = new CarrinhoDeCompras();
+        $this->carrinho->adiciona(new Produto('Geladeira', 1201.45, 1));
 
-        $carrinho->adiciona(new Produto('Geladeira', 1201.45, 1));
-
-        $valor = $carrinho->maiorValor();
+        $valor = $this->carrinho->maiorValor();
 
         $this->assertEquals(1201.45, $valor);
     }
@@ -45,15 +55,13 @@ class CarrinhoDeComprasTest extends TestCase
      */
     public function testDeveRetornarMaiorValorCarrinhoMuitosElementos(): void
     {
-        $carrinho = new CarrinhoDeCompras();
+        $this->carrinho->adiciona(new Produto('Geladeira', 1300, 1));
 
-        $carrinho->adiciona(new Produto('Geladeira', 1300, 1));
+        $this->carrinho->adiciona(new Produto('Notebook', 4900, 1));
 
-        $carrinho->adiciona(new Produto('Notebook', 4900, 1));
+        $this->carrinho->adiciona(new Produto('Camiseta', 39.99, 200));
 
-        $carrinho->adiciona(new Produto('Camiseta', 39.99, 200));
-
-        $valor = $carrinho->maiorValor();
+        $valor = $this->carrinho->maiorValor();
 
         $this->assertEquals(7998.00, $valor);
     }
