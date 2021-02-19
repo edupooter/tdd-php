@@ -40,4 +40,26 @@ class MaiorPrecoTest extends TestCase
 
         $this->assertEquals(1201.45, $valor);
     }
+
+    /**
+     * Retorna o maior valor caso o carrinho tenha muitos itens
+     *
+     * @return void
+     */
+    public function testDeveRetornarMaiorValorCarrinhoMuitosElementos(): void
+    {
+        $carrinho = new CarrinhoDeCompras();
+
+        $carrinho->adiciona(new Produto('Geladeira', 1300, 1));
+
+        $carrinho->adiciona(new Produto('Notebook', 4900, 1));
+
+        $carrinho->adiciona(new Produto('Camiseta', 39.99, 200));
+
+        $algoritmo = new MaiorPreco();
+
+        $valor = $algoritmo->encontra($carrinho);
+
+        $this->assertEquals(7998.00, $valor);
+    }
 }
