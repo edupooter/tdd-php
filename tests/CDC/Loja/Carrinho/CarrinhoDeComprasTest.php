@@ -16,6 +16,11 @@ class CarrinhoDeComprasTest extends TestCase
      */
     private $carrinho;
 
+    /**
+     * Comandos executados ao iniciar o TestCase
+     *
+     * @return void
+     */
     protected function setUp(): void
     {
         $this->carrinho = new CarrinhoDeCompras();
