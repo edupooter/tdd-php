@@ -111,4 +111,22 @@ class CarrinhoDeComprasTest extends TestCase
         // Verifica se o produto esperado corresponde ao adicionado
         $this->assertEquals($produto, $this->carrinho->getProdutos()[0]);
     }
+
+    /**
+     * Valida o conteúdo dos objetos adicionados no carrinho
+     *
+     * @return void
+     */
+    public function testListaDeProdutos(): void
+    {
+        $lista = (new CarrinhoDeCompras())
+            ->adiciona(new Produto('Jogo de Jantar', 200.00, 1))
+            ->adiciona(new Produto('Jogo de Pratos', 100.00, 1));
+
+        $this->assertEquals(2, count($lista->getProdutos()));
+
+        $this->assertEquals(200.00, $lista->getProdutos()[0]->getValor());
+
+        $this->assertEquals(100.00, $lista->getProdutos()[1]->getValor());
+    }
 }
