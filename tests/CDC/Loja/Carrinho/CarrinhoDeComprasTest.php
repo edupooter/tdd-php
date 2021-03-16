@@ -42,11 +42,34 @@ class CarrinhoDeComprasTest extends TestCase
      */
     public function testDeveRetornarValorItemCarrinhoTemUmElemento(): void
     {
-        $this->carrinho->adiciona(new Produto('Geladeira', 1201.45, 1));
+        $produto = new Produto('Geladeira', 1201.45, 1);
+
+        $this->carrinho->adiciona($produto);
 
         $valor = $this->carrinho->maiorValor();
 
         $this->assertEquals(1201.45, $valor);
+    }
+
+    /**
+     * Compara produtos criados
+     *
+     * @return void
+     */
+    public function testComparaProdutosCriados(): void
+    {
+        $produto = new Produto('Geladeira', 1201.45, 1);
+
+        // Alternativa 1
+        $this->assertEquals('Geladeira', $produto->getNome());
+        $this->assertEquals(1201.45, $produto->getValor());
+        $this->assertEquals(1, $produto->getQuantidade());
+        $this->assertEquals(1201.45, $produto->getValorTotal());
+
+        // Alternativa 2
+        $itemEsperado =  new Produto('Geladeira', 1201.45, 1);
+
+        $this->assertEquals($itemEsperado, $produto);
     }
 
     /**
@@ -63,5 +86,29 @@ class CarrinhoDeComprasTest extends TestCase
         $valor = $this->carrinho->maiorValor();
 
         $this->assertEquals(300.00, $valor);
+    }
+
+    /**
+     * Verifica se um produto foi guardado no carrinho
+     *
+     * @return void
+     */
+    public function testDeveAdicionarItens(): void
+    {
+        // Garante que o carrinho esteja vazio
+        $this->assertEmpty($this->carrinho->getProdutos());
+
+        $produto =  new Produto('Geladeira', 1201.45, 1);
+
+        $this->carrinho->adiciona($produto);
+
+        // Verifica quantos produtos há no carrinho
+        $quantidadeEsperada = count($this->carrinho->getProdutos());
+
+        // Espera que haja apenas um produto no carrinho
+        $this->assertEquals(1, $quantidadeEsperada);
+
+        // Verifica se o produto esperado corresponde ao adicionado
+        $this->assertEquals($produto, $this->carrinho->getProdutos()[0]);
     }
 }
