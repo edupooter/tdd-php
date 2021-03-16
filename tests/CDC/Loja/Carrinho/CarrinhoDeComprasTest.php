@@ -114,7 +114,7 @@ class CarrinhoDeComprasTest extends TestCase
 
     /**
      * Valida o conteúdo dos objetos adicionados no carrinho
-     *
+     * 
      * @return void
      */
     public function testListaDeProdutos(): void
