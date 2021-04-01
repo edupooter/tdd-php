@@ -63,16 +63,16 @@ class CarrinhoDeComprasTest extends TestCase
      */
     public function testComparaProdutosCriados(): void
     {
-        $produto = new Produto('Geladeira', 1201.45, 1);
+        $produto = new Produto('Geladeira', 1201.45, 2);
 
         // Alternativa 1
         $this->assertEquals('Geladeira', $produto->getNome());
         $this->assertEquals(1201.45, $produto->getValor());
-        $this->assertEquals(1, $produto->getQuantidade());
-        $this->assertEquals(1201.45, $produto->getValorTotal());
+        $this->assertEquals(2, $produto->getQuantidade());
+        $this->assertEquals(2402.9, $produto->getValorTotal());
 
         // Alternativa 2
-        $itemEsperado =  new Produto('Geladeira', 1201.45, 1);
+        $itemEsperado =  new Produto('Geladeira', 1201.45, 2);
 
         $this->assertEquals($itemEsperado, $produto);
     }
