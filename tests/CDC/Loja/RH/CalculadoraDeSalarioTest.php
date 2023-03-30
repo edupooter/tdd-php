@@ -17,7 +17,8 @@ class CalculadoraDeSalarioTest extends TestCase
     {
         $calculadora = new CalculadoraDeSalario();
 
-        $desenvolvedor = new Funcionario("André", 1500.00, TabelaCargos::DESENVOLVEDOR);
+        $desenvolvedor = new Funcionario("André", 1500.00, "desenvolvedor");
+
 
         $salario = $calculadora->calculaSalario($desenvolvedor);
 
@@ -33,7 +34,7 @@ class CalculadoraDeSalarioTest extends TestCase
     {
         $calculadora = new CalculadoraDeSalario();
 
-        $desenvolvedor = new Funcionario("José", 4000.00, TabelaCargos::DESENVOLVEDOR);
+        $desenvolvedor = new Funcionario("José", 4000.00, "desenvolvedor");
 
         $salario = $calculadora->calculaSalario($desenvolvedor);
 
@@ -49,7 +50,7 @@ class CalculadoraDeSalarioTest extends TestCase
     {
         $calculadora = new CalculadoraDeSalario();
 
-        $dba = new Funcionario("Thiago", 500.00, TabelaCargos::DBA);
+        $dba = new Funcionario("Thiago", 500.00, "dba");
 
         $salario = $calculadora->calculaSalario($dba);
 
@@ -65,7 +66,7 @@ class CalculadoraDeSalarioTest extends TestCase
     {
         $calculadora = new CalculadoraDeSalario();
 
-        $dba = new Funcionario('Maurício', 4500.00, TabelaCargos::DBA);
+        $dba = new Funcionario('Maurício', 4500.00, "dba");
 
         $salario = $calculadora->calculaSalario($dba);
 
