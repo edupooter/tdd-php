@@ -4,7 +4,28 @@ namespace CDC\Loja\RH;
 
 use CDC\Loja\RH\Funcionario;
 
-interface RegraDeCalculo
+abstract class RegraDeCalculo
 {
-    public function calcula(Funcionario $funcionario);
+    public function calcula(Funcionario $funcionario)
+    {
+        $salario = $funcionario->getSalario();
+
+        if ($salario > $this->limite()) {
+            return $salario * (float) $this->porcentagemAcimaDoLimite();
+        }
+
+        return $salario * (float) $this->porcentagemBase();
+    }
+
+    protected function limite()
+    {
+    }
+
+    protected function porcentagemAcimaDoLimite()
+    {
+    }
+
+    protected function porcentagemBase()
+    {
+    }
 }
