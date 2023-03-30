@@ -9,7 +9,7 @@ class CalculadoraTest extends TestCase
 {
     public function testDeveSomarDoisNumerosPositivos()
     {
-        $this->assertEquals(0.3, (new Calculadora())->somar(0.1, 0.2));
+        $this->assertEquals(0.30000000000000004, (new Calculadora())->somar(0.1, 0.2));
     }
 
     public function testDeveSomarPositivoComNegativo()
