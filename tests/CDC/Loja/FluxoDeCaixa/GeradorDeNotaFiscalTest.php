@@ -10,13 +10,13 @@ class GeradorDeNotaFiscalTest extends TestCase
 {
     use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
-    private $dao;
-    private $sap;
+    private $acao1;
+    private $acao2;
 
     public function setup(): void
     {
-        $this->dao = Mockery::mock(NFDao::class);
-        $this->sap = Mockery::mock(SAP::class);
+        $this->acao1 = Mockery::mock(AcaoAposGerarNotaInterface::class);
+        $this->acao2 = Mockery::mock(AcaoAposGerarNotaInterface::class);
     }
 
     public function tearDown(): void
@@ -25,47 +25,22 @@ class GeradorDeNotaFiscalTest extends TestCase
         Mockery::close();
     }
 
-    public function testDeveGerarNFComValorDeImpostoDescontado()
+    public function testDeveInvocarAcoesPosteriores()
     {
         // Arrange
-        $this->dao->shouldReceive("persiste")->andReturn(true);
-        $this->sap->shouldReceive("envia")->andReturn(true);
+        $this->acao1->shouldReceive("executa")->andReturn(true);
+        $this->acao2->shouldReceive("executa")->andReturn(true);
 
         // Act
-        $gerador = new GeradorDeNotaFiscal($this->dao, $this->sap);
+        $gerador = new GeradorDeNotaFiscal([$this->acao1, $this->acao2]);
         $pedido = new Pedido("Andre", 1000, 1);
+
         $nf = $gerador->gera($pedido);
 
         // Assert
-        $this->assertEquals(1000 * 0.94, $nf->getValor(null, 0.00001));
-    }
-
-    public function testDevePersistirNFGerada()
-    {
-        // Arrange
-        $this->dao->shouldReceive("persiste")->andReturn(true);
-        $this->sap->shouldReceive("envia")->andReturn(true);
-
-        // Act
-        $gerador = new GeradorDeNotaFiscal($this->dao, $this->sap);
-        $pedido = new Pedido("Andre", 1000, 1);
-        $nf = $gerador->gera($pedido);
-
-        // Assert
-        $this->assertTrue($this->dao->persiste($nf));
+        $this->assertTrue($this->acao1->executa($nf));
+        $this->assertTrue($this->acao2->executa($nf));
         $this->assertNotNull($nf);
-    }
-
-    public function testDeveEnviarNFGeradaParaSAP()
-    {
-        $this->dao->shouldReceive("persiste")->andReturn(true);
-        $this->sap->shouldReceive("envia")->andReturn(true);
-
-        $gerador = new GeradorDeNotaFiscal($this->dao, $this->sap);
-        $pedido = new Pedido("Andre", 1000, 1);
-        $nf = $gerador->gera($pedido);
-
-        $this->assertTrue($this->sap->envia($nf));
-        $this->assertEquals(1000 * 0.94, $nf->getValor(null, 0.00001));
+        $this->assertInstanceOf(NotaFiscal::class, $nf);
     }
 }
