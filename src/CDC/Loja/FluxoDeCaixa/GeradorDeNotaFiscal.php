@@ -4,23 +4,32 @@ namespace CDC\Loja\FluxoDeCaixa;
 
 use CDC\Exemplos\RelogioInterface;
 use CDC\Loja\FluxoDeCaixa\Pedido;
+use CDC\Loja\Tributos\TabelaInterface;
 
 class GeradorDeNotaFiscal
 {
     private $acoes;
     private $relogio;
+    private $tabela;
 
-    public function __construct($acoes, RelogioInterface $relogio)
+    public function __construct($acoes, RelogioInterface $relogio, TabelaInterface $tabela)
     {
         $this->acoes = $acoes;
         $this->relogio = $relogio;
+        $this->tabela = $tabela;
     }
 
     public function gera(Pedido $pedido)
     {
+        $valorTabela = $this->tabela->paraValor($pedido->getValorTotal());
+
+        $valorTotalPedido = $pedido->getValorTotal();
+
+        $valorTotal = $valorTotalPedido - ($valorTotalPedido * $valorTabela);
+
         $nf = new NotaFiscal(
             $pedido->getCliente(),
-            $pedido->getValorTotal() * 0.94,
+            $valorTotal,
             $this->relogio->hoje()
         );
 
